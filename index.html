@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Tatiana Machado - 15 años | Invitación Inmersiva</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', 'Arial', sans-serif;
+      background: #e0f2fe;
+      color: #1a3b4f;
+      scroll-behavior: smooth;
+      position: relative;
+      width: 100%;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+    .invitation-content {
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      position: relative;
+      z-index: 2;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    
+    .invitation-content.visible {
+      opacity: 1;
+    }
+
+    .hero {
+      background-image: url('fondo1.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    .details-section {
+      background-image: url('fondo2.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .details-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      z-index: -1;
+    }
+
+    .gallery-immersive {
+      background-image: url('fondo3.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      position: relative;
+      z-index: 2;
+      overflow-x: hidden;
+    }
+    
+    .gallery-immersive::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(240, 249, 255, 0.85);
+      z-index: -1;
+    }
+
+    .te-espero-section {
+      background-image: linear-gradient(rgba(95, 157, 182, 0.75), rgba(74, 122, 142, 0.8)), url('fondo4.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    .imagen-final-section {
+      width: 100%;
+      position: relative;
+      z-index: 2;
+      background-image: url('fondo5.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      padding: 60px 20px 80px 20px;
+    }
+
+    .imagen-final-container {
+      width: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .imagen-final-container img {
+      width: 90%;
+      max-width: 800px;
+      height: auto;
+      border-radius: 30px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      display: block;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .imagen-final-container img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 35px 65px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Mensaje debajo de la foto - NUEVA POSICIÓN */
+    .final-message {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1.5rem 2rem;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border-radius: 60px;
+      display: inline-block;
+      width: auto;
+      max-width: 90%;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .final-message p {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #5f9db6;
+      font-family: 'Great Vibes', cursive;
+      letter-spacing: 1px;
+    }
+
+    .final-message i {
+      color: #ffb7c5;
+      margin: 0 8px;
+    }
+
+    .header-icons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .animated-icon {
+      font-size: 2.5rem;
+      display: inline-block;
+    }
+
+    .icon-bolt {
+      color: #fbbf24;
+      animation: pulseBolt 1.8s ease-in-out infinite;
+      filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.5));
+    }
+
+    .icon-cake {
+      color: #ffb7c5;
+      animation: floatCake 2.4s ease-in-out infinite;
+      filter: drop-shadow(0 0 8px rgba(255, 183, 197, 0.5));
+    }
+
+    .icon-ghost {
+      color: #7dd3fc;
+      animation: floatGhost 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 8px rgba(125, 211, 252, 0.5));
+    }
+
+    .icon-butterfly {
+      color: #f5a9b8;
+      animation: flutter 2.6s ease-in-out infinite;
+      filter: drop-shadow(0 0 8px rgba(245, 169, 184, 0.5));
+    }
+
+    @keyframes pulseBolt {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.85; }
+    }
+
+    @keyframes floatCake {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(6deg); }
+    }
+
+    @keyframes floatGhost {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-14px); }
+    }
+
+    @keyframes flutter {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      25% { transform: translateY(-6px) rotate(-12deg); }
+      75% { transform: translateY(-6px) rotate(12deg); }
+    }
+
+    .countdown-modern {
+      background: linear-gradient(135deg, rgba(230, 244, 255, 0.9), rgba(212, 232, 245, 0.9));
+      border-radius: 100px;
+      padding: 2rem;
+      margin: 3rem auto;
+      max-width: 700px;
+      opacity: 0;
+      filter: blur(30px);
+      transform: scale(0.92);
+      transition: all 3.5s cubic-bezier(0.2, 0.95, 0.4, 1.05);
+    }
+
+    .countdown-modern.visible {
+      opacity: 1;
+      filter: blur(0);
+      transform: scale(1);
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(4px);
+      padding: 1.8rem;
+      border-radius: 28px;
+      min-width: 200px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      opacity: 0;
+      transition: opacity 3.2s cubic-bezier(0.4, 0.1, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0.1, 0.2, 1);
+    }
+
+    .info-card.visible-left { opacity: 1; transform: translateX(0) rotateY(0deg); }
+    .info-card.visible-right { opacity: 1; transform: translateX(0) rotateY(0deg); }
+    .info-card.hidden-left { opacity: 0; transform: translateX(-140px) rotateY(15deg); }
+    .info-card.hidden-right { opacity: 0; transform: translateX(140px) rotateY(-15deg); }
+    .info-card:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 25px 45px rgba(95, 157, 182, 0.25); }
+
+    .prex-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: white;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      opacity: 0;
+      animation: spinIn 3.5s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+    }
+
+    @keyframes spinIn {
+      0% { opacity: 0; transform: rotateY(180deg) scale(0.5); }
+      100% { opacity: 1; transform: rotateY(0deg) scale(1); }
+    }
+
+    .fullscreen-section {
+      min-height: 100vh;
+      width: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    .hero-content {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px);
+      border-radius: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 3rem 2.5rem;
+      max-width: 85%;
+      animation: fadeInUp 1s ease;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin: 0;
+      background: linear-gradient(135deg, #ffffff, #f0f9ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 16px 40px;
+      background: linear-gradient(135deg, #7ab3c8, #5f9db6);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.4s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(95, 157, 182, 0.4); }
+
+    .details-section {
+      padding: 100px 24px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      color: #5f9db6;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+      opacity: 0;
+      animation: slideInUp 0.9s ease forwards;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #7ab3c8, #9ac2d4);
+    }
+
+    .info-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .info-icon { font-size: 2.8rem; color: #7ab3c8; margin-bottom: 1rem; transition: transform 0.3s; }
+    .info-card:hover .info-icon { transform: scale(1.1); }
+    .info-card h3 { font-size: 1.4rem; margin-bottom: 0.5rem; color: #5f9db6; font-weight: 700; }
+    .info-card p { color: #5a7b8c; font-size: 1rem; font-weight: 500; }
+
+    .timer-modern {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .time-card-modern {
+      background: white;
+      border-radius: 24px;
+      padding: 1rem 1.5rem;
+      min-width: 90px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .time-number-modern { font-size: 2.5rem; font-weight: 800; color: #7ab3c8; line-height: 1; }
+    .time-label-modern { font-size: 0.7rem; text-transform: uppercase; color: #7f8c8d; }
+
+    /* GALERÍA ULTRA OPTIMIZADA */
+    .gallery-immersive { padding: 80px 0; position: relative; z-index: 2; overflow-x: hidden; }
+    .gallery-container { width: 100%; overflow: hidden; position: relative; perspective: 1200px; }
+    
+    .gallery-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      gap: 30px;
+      scrollbar-width: none;
+      padding: 40px 60px;
+    }
+    .gallery-track::-webkit-scrollbar { display: none; }
+    
+    .gallery-item {
+      flex: 0 0 80%;
+      max-width: 500px;
+      scroll-snap-align: center;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+      transform-style: preserve-3d;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+    .gallery-item:hover { transform: rotateY(8deg) translateZ(30px) scale(1.02); box-shadow: 0 35px 55px -20px rgba(0, 0, 0, 0.5); }
+    
+    .gallery-img-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #d4e8f5, #b8d9f0);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 20px;
+      opacity: 1;
+    }
+    
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+      padding: 30px 20px 20px;
+      color: white;
+      font-size: 1rem;
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      border-radius: 0 0 20px 20px;
+    }
+    .gallery-item:hover .gallery-caption { opacity: 1; }
+    
+    .gallery-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    .gallery-nav-btn {
+      background: rgba(255,255,255,0.95);
+      border: none;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.6rem;
+      color: #7ab3c8;
+      pointer-events: auto;
+      transition: all 0.3s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .gallery-nav-btn:hover { transform: scale(1.15); background: white; }
+
+    .te-espero-section {
+      padding: 120px 24px;
+      text-align: center;
+      color: white;
+      position: relative;
+      z-index: 2;
+    }
+    .te-espero-section h2 { font-size: 3.5rem; font-family: 'Great Vibes', cursive; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); }
+    .te-espero-section p { font-size: 1.4rem; max-width: 750px; margin: 1.2rem auto; font-family: 'Great Vibes', cursive; }
+    .te-espero-section .signature { margin-top: 2.8rem; font-size: 1.8rem; font-family: 'Great Vibes', cursive; }
+
+    .form-modern {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 40px;
+      padding: 2.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .form-group-modern { margin-bottom: 1.5rem; }
+    .form-group-modern input {
+      width: 100%;
+      padding: 16px 24px;
+      border-radius: 60px;
+      border: 2px solid #e2e8f0;
+      font-size: 1rem;
+    }
+    .radio-group-modern {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .radio-group-modern label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding: 10px 20px;
+      background: #f8fafc;
+      border-radius: 60px;
+    }
+
+    .modal-nota {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(8px);
+      z-index: 30000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: white;
+      border-radius: 40px;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+    .modal-content textarea {
+      width: 100%;
+      padding: 15px;
+      border-radius: 20px;
+      border: 2px solid #e2e8f0;
+      margin: 1rem 0;
+    }
+    .modal-buttons { display: flex; gap: 1rem; }
+    .btn-enviar { background: #25D366; color: white; flex: 1; padding: 12px; border-radius: 40px; border: none; cursor: pointer; }
+    .btn-cerrar { background: #e2e8f0; color: #5a7b8c; flex: 1; padding: 12px; border-radius: 40px; border: none; cursor: pointer; }
+
+    .music-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-radius: 60px;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .start-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #cfe6f0, #b8d9f0);
+      z-index: 20000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .start-content { text-align: center; padding: 2rem; }
+    .start-title { font-size: 3rem; background: linear-gradient(135deg, #5f9db6, #7ab3c8); background-clip: text; -webkit-background-clip: text; color: transparent; font-weight: 800; }
+    .start-subtitle { font-size: 1.3rem; color: #5f9db6; margin-bottom: 2rem; }
+    .start-btn { background: linear-gradient(135deg, #7ab3c8, #5f9db6); color: white; border: none; padding: 18px 48px; border-radius: 60px; font-size: 1.2rem; font-weight: 600; cursor: pointer; }
+    .start-hint { margin-top: 1.5rem; font-size: 0.8rem; color: #7ab3c8; }
+    .location-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #7ab3c8;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 60px;
+      text-decoration: none;
+      margin-top: 1rem;
+    }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideInUp { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      .section-title { font-size: 2rem; }
+      .te-espero-section h2 { font-size: 2.5rem; }
+      .te-espero-section p { font-size: 1.1rem; }
+      .time-number-modern { font-size: 1.8rem; }
+      .gallery-nav-btn { width: 40px; height: 40px; font-size: 1.2rem; }
+      .gallery-item { flex: 0 0 85%; }
+      .gallery-track { padding: 20px 40px; gap: 20px; }
+      .final-message p { font-size: 1.1rem; }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+</head>
+<body>
+
+  <div class="start-overlay" id="startOverlay">
+    <div class="start-content">
+      <h2 class="start-title">Tatiana Machado</h2>
+      <p class="start-subtitle">XV Años</p>
+      <button class="start-btn" id="startBtn"><i class="fas fa-music"></i> DESCUBRIR LA EXPERIENCIA</button>
+      <p class="start-hint">✨ Toca para comenzar ✨</p>
+    </div>
+  </div>
+
+  <div class="invitation-content" id="invitationContent">
+    <section class="fullscreen-section hero">
+      <div class="hero-content">
+        <div class="header-icons">
+          <i class="fas fa-bolt animated-icon icon-bolt"></i>
+          <i class="fas fa-ghost animated-icon icon-ghost"></i>
+          <i class="fas fa-birthday-cake animated-icon icon-cake"></i>
+          <i class="fas fa-butterfly animated-icon icon-butterfly"></i>
+        </div>
+        <h1>MIS XV<br>TATIANA</h1>
+      </div>
+    </section>
+
+    <section class="details-section" id="detalles">
+      <h2 class="section-title">Detalles del evento</h2>
+      <div class="info-grid">
+        <div class="info-card" id="cardFecha" data-side="left"><div class="info-icon"><i class="fas fa-calendar-alt"></i></div><h3>Fecha</h3><p>30 de Abril, 2026</p></div>
+        <div class="info-card" id="cardHora" data-side="right"><div class="info-icon"><i class="fas fa-clock"></i></div><h3>Hora</h3><p>22:00 hs</p></div>
+        <div class="info-card" id="cardLugar" data-side="left"><div class="info-icon"><i class="fas fa-map-marker-alt"></i></div><h3>Lugar</h3><p>Paseo Aleman, Salto</p></div>
+        <div class="info-card" id="cardVestimenta" data-side="right"><div class="info-icon"><i class="fas fa-tshirt"></i></div><h3>Vestimenta</h3><p>Formal (evitar color AZUL y sus tonalidades)</p></div>
+      </div>
+      <a href="https://maps.google.com/?q=Av.+Benito+Solari,+Salto,+Uruguay" target="_blank" class="location-link"><i class="fas fa-map-marker-alt"></i> Ver ubicación en Google Maps</a>
+      <div class="countdown-modern" id="countdownBox">
+        <h3 style="color: #5f9db6; margin-bottom: 1rem;">🎉 ¡FALTA POCO! 🎉</h3>
+        <div class="timer-modern">
+          <div class="time-card-modern"><div class="time-number-modern" id="days">00</div><div class="time-label-modern">Días</div></div>
+          <div class="time-card-modern"><div class="time-number-modern" id="hours">00</div><div class="time-label-modern">Horas</div></div>
+          <div class="time-card-modern"><div class="time-number-modern" id="minutes">00</div><div class="time-label-modern">Minutos</div></div>
+          <div class="time-card-modern"><div class="time-number-modern" id="seconds">00</div><div class="time-label-modern">Segundos</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-immersive">
+      <h2 class="section-title" style="display: inline-block;">Mis Momentos</h2>
+      <div class="gallery-container">
+        <div class="gallery-track" id="galleryTrack"></div>
+        <div class="gallery-nav">
+          <button class="gallery-nav-btn" id="galleryPrev"><i class="fas fa-chevron-left"></i></button>
+          <button class="gallery-nav-btn" id="galleryNext"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 1.5rem; color: #7f8c8d;">
+        <i class="fas fa-hand-pointer"></i> Toca para ampliar · Efecto 3D al pasar el mouse
+      </div>
+    </section>
+
+    <section class="te-espero-section">
+      <h2><i class="fas fa-butterfly" style="font-size: 2.5rem; margin-right: 15px;"></i>Te espero<i class="fas fa-bolt" style="font-size: 2.5rem; margin-left: 15px; color: #fbbf24;"></i></h2>
+      <p>Ese día quiero compartir esta alegría con las personas que hacen parte de mi vida,</p>
+      <p>las cuales aprecio... Tú eres una de ellas!!</p>
+      <p>Me encantaría que seas parte de este momento tan especial para mí.</p>
+      <p class="signature"><i class="fas fa-ghost" style="font-size: 2rem; margin-right: 10px;"></i>Con cariño, Tatiana<i class="fas fa-birthday-cake" style="font-size: 2rem; margin-left: 10px;"></i></p>
+    </section>
+
+    <section class="details-section" id="confirmar">
+      <h2 class="section-title">✨ ¿Venis? ✨</h2>
+      <p style="margin-bottom: 2rem; font-size: 1.1rem; color: #5f9db6;">Confirma tu asistencia antes del 20/04</p>
+      <div class="form-modern">
+        <form id="rsvpForm">
+          <div class="form-group-modern"><input type="text" id="nombre" placeholder="Tu nombre completo *" required></div>
+          <div class="form-group-modern"><input type="tel" id="celular" placeholder="Celular / WhatsApp *" required></div>
+          <div class="form-group-modern">
+            <div class="radio-group-modern">
+              <label><input type="radio" name="asistencia" value="Sí, estaré presente ✨" required> ✅ Sí, asistiré</label>
+              <label><input type="radio" name="asistencia" value="No podré asistir, pero te envío un abrazo"> ❌ No podré asistir</label>
+            </div>
+          </div>
+          <button type="submit" class="btn" style="width: 100%; background: linear-gradient(135deg, #25D366, #128C7E);"><i class="fab fa-whatsapp"></i> Enviar confirmación por WhatsApp</button>
+          <div id="formFeedback" style="margin-top: 1rem; font-size: 0.85rem;"></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="details-section" style="border-top: 1px solid rgba(226, 232, 240, 0.5);">
+      <h2 class="section-title"> Detalle de presente </h2>
+      <div id="prexContainer" class="prex-container">
+        <span>🎁 Si deseas dejar un presente:</span>
+        <strong style="color: #7ab3c8; font-size: 1.2rem;">Prex: c.i 59092703</strong>
+      </div>
+      <p style="margin-top: 1.5rem;">Tu presencia es el mejor regalo, pero si deseas colaborar, esta es mi cuenta</p>
+    </section>
+
+    <!-- SECCIÓN IMAGEN FINAL CON MENSAJE DEBAJO -->
+    <section class="imagen-final-section">
+      <div class="imagen-final-container">
+        <img src="imagen_final.png" alt="Gracias por ser parte">
+        <div class="final-message">
+          <p><i class="fas fa-heart"></i> ¡Gracias por ser parte de este momento! <i class="fas fa-heart"></i></p>
+        </div>
+      </div>
+    </section>
+
+    <footer style="background: rgba(95, 157, 182, 0.9); color: white; text-align: center; padding: 2rem;">
+      <i class="fas fa-butterfly"></i> Tatiana Machado · 15 años · 30 de Abril 2026 · 21:00 hs <i class="fas fa-butterfly"></i>
+    </footer>
+  </div>
+
+  <div id="modalNota" class="modal-nota">
+    <div class="modal-content">
+      <i class="fas fa-sad-tear" style="font-size: 3rem; color: #fbbf24;"></i>
+      <h3 style="margin: 1rem 0; color: #5f9db6;">¡Qué pena que no podrás venir!</h3>
+      <p>¿Quieres dejarle un mensaje a Tatiana?</p>
+      <textarea id="notaMensaje" rows="4" placeholder="Escribe tu mensaje de cariño..."></textarea>
+      <div class="modal-buttons">
+        <button class="btn-enviar" id="enviarNotaBtn"><i class="fab fa-whatsapp"></i> Enviar nota</button>
+        <button class="btn-cerrar" id="cerrarModalBtn">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="music-float" id="musicToggleBtn" style="display: none;">
+    <i class="fas fa-music" id="musicIcon"></i>
+    <span>tati xv</span>
+  </div>
+
+  <script>
+    function precargarImagenes() {
+      const imagenesParaPrecargar = ['imagen1.png', 'imagen2.png', 'imagen3.png'];
+      imagenesParaPrecargar.forEach(src => { const img = new Image(); img.src = src; });
+    }
+    
+    const galleryTrack = document.getElementById('galleryTrack');
+    const prevBtn = document.getElementById('galleryPrev');
+    const nextBtn = document.getElementById('galleryNext');
+    let currentIndex = 0;
+
+    for (let i = 1; i <= 12; i++) {
+      const galleryItem = document.createElement('div');
+      galleryItem.className = 'gallery-item';
+      const wrapper = document.createElement('div');
+      wrapper.className = 'gallery-img-wrapper';
+      const img = document.createElement('img');
+      img.src = `imagen${i}.jpg`;
+      img.alt = `✨ Momento especial ${i} ✨`;
+      img.onerror = function() { this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect width="100" height="100" fill="%23d4e8f5"/%3E%3Ctext x="50" y="55" text-anchor="middle" fill="%237ab3c8" font-size="14"%3E🦋%3C/text%3E%3C/svg%3E'; };
+      wrapper.appendChild(img);
+      galleryItem.appendChild(wrapper);
+      const caption = document.createElement('div');
+      caption.className = 'gallery-caption';
+      caption.innerHTML = `✨ Momento especial ${i} ✨`;
+      galleryItem.appendChild(caption);
+      galleryItem.addEventListener('click', () => {
+        const modal = document.createElement('div');
+        modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:flex;align-items:center;justify-content:center;z-index:10000;cursor:pointer';
+        const modalImg = document.createElement('img');
+        modalImg.src = img.src;
+        modalImg.style.cssText = 'max-width:90%;max-height:90%;object-fit:contain;border-radius:12px';
+        modal.appendChild(modalImg);
+        document.body.appendChild(modal);
+        modal.addEventListener('click', () => modal.remove());
+      });
+      galleryTrack.appendChild(galleryItem);
+    }
+    
+    function scrollToIndex(index) {
+      const itemWidth = galleryTrack.children[0]?.offsetWidth || 0;
+      if (itemWidth > 0) galleryTrack.scrollTo({ left: index * (itemWidth + 30), behavior: 'smooth' });
+    }
+    
+    nextBtn.addEventListener('click', () => { const total = galleryTrack.children.length; currentIndex = (currentIndex + 1) % total; scrollToIndex(currentIndex); });
+    prevBtn.addEventListener('click', () => { const total = galleryTrack.children.length; currentIndex = (currentIndex - 1 + total) % total; scrollToIndex(currentIndex); });
+    galleryTrack.addEventListener('scroll', () => {
+      const scrollLeft = galleryTrack.scrollLeft;
+      const itemWidth = galleryTrack.children[0]?.offsetWidth || 0;
+      const gap = 30;
+      if (itemWidth > 0) currentIndex = Math.round(scrollLeft / (itemWidth + gap));
+    });
+    
+    precargarImagenes();
+
+    function initReversibleCards() {
+      const cards = [
+        { element: document.getElementById('cardFecha'), side: 'left' },
+        { element: document.getElementById('cardHora'), side: 'right' },
+        { element: document.getElementById('cardLugar'), side: 'left' },
+        { element: document.getElementById('cardVestimenta'), side: 'right' }
+      ];
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const card = entry.target;
+          const side = card.getAttribute('data-side');
+          if (entry.isIntersecting) {
+            if (side === 'left') { card.classList.remove('hidden-left'); card.classList.add('visible-left'); }
+            else { card.classList.remove('hidden-right'); card.classList.add('visible-right'); }
+          } else {
+            if (side === 'left') { card.classList.remove('visible-left'); card.classList.add('hidden-left'); }
+            else { card.classList.remove('visible-right'); card.classList.add('hidden-right'); }
+          }
+        });
+      }, { threshold: 0.3 });
+      cards.forEach(card => {
+        if (card.element) {
+          observer.observe(card.element);
+          if (card.side === 'left') card.element.classList.add('hidden-left');
+          else card.element.classList.add('hidden-right');
+        }
+      });
+    }
+
+    function animateCountdownOnScroll() {
+      const countdownBox = document.getElementById('countdownBox');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) { countdownBox.classList.add('visible'); observer.unobserve(countdownBox); } });
+      }, { threshold: 0.3 });
+      observer.observe(countdownBox);
+    }
+
+    function lanzarConfetis() { canvasConfetti({ particleCount: 280, spread: 80, origin: { y: 0.6 }, colors: ['#7ab3c8', '#5f9db6', '#ffb7c5', '#fbbf24'] }); }
+    function lanzarCaritasTristes() {
+      const container = document.createElement('div');
+      container.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999';
+      document.body.appendChild(container);
+      const caritas = ['😢', '🥺', '😔', '💔', '😞'];
+      for (let i = 0; i < 60; i++) {
+        const el = document.createElement('div');
+        el.innerText = caritas[Math.floor(Math.random() * caritas.length)];
+        el.style.cssText = `position:absolute;font-size:${Math.random() * 45 + 20}px;left:${Math.random() * 100}%;top:-10px;opacity:0.9`;
+        container.appendChild(el);
+        el.animate([{ transform: 'translateY(0px)', opacity: 0.9 }, { transform: `translateY(${window.innerHeight + 120}px)`, opacity: 0 }], { duration: 2000 });
+        setTimeout(() => el.remove(), 2100);
+      }
+      setTimeout(() => container.remove(), 2200);
+    }
+
+    const WHATSAPP_NUMBER = "+598097521335";
+    const radioSi = document.querySelector('input[name="asistencia"][value="Sí, estaré presente ✨"]');
+    const radioNo = document.querySelector('input[name="asistencia"][value="No podré asistir, pero te envío un abrazo"]');
+    const modalNota = document.getElementById('modalNota');
+    const notaMensaje = document.getElementById('notaMensaje');
+
+    if (radioSi) radioSi.addEventListener('change', function() { if (this.checked) lanzarConfetis(); });
+    if (radioNo) radioNo.addEventListener('change', function() { if (this.checked) { lanzarCaritasTristes(); modalNota.style.display = 'flex'; } });
+    document.getElementById('cerrarModalBtn').addEventListener('click', () => { modalNota.style.display = 'none'; if (radioNo) radioNo.checked = false; });
+    document.getElementById('enviarNotaBtn').addEventListener('click', () => {
+      const nombre = document.getElementById('nombre').value.trim();
+      const celular = document.getElementById('celular').value.trim();
+      const mensajeNota = notaMensaje.value.trim();
+      if (!nombre) { alert("❌ Ingresa tu nombre"); return; }
+      let mensaje = `*Nota para Tatiana*%0A👤 ${nombre}%0A📞 ${celular || 'No especificado'}%0A💬 ${mensajeNota || 'Un abrazo'}`;
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
+      modalNota.style.display = 'none';
+      if (radioNo) radioNo.checked = false;
+      notaMensaje.value = '';
+    });
+
+    const audio = new Audio('cancion.mp3');
+    audio.loop = true;
+    audio.volume = 0.5;
+    let isPlaying = false;
+    const startOverlay = document.getElementById('startOverlay');
+    const invitationContent = document.getElementById('invitationContent');
+    const musicBtn = document.getElementById('musicToggleBtn');
+    const musicIcon = document.getElementById('musicIcon');
+    const startBtn = document.getElementById('startBtn');
+    
+    function startMusic() { audio.play().then(() => { isPlaying = true; musicIcon.className = 'fas fa-music'; }).catch(() => { isPlaying = false; musicIcon.className = 'fas fa-volume-mute'; }); }
+    function stopMusic() { audio.pause(); isPlaying = false; musicIcon.className = 'fas fa-volume-mute'; }
+    function toggleMusic() { if (isPlaying) stopMusic(); else startMusic(); }
+    
+    startBtn.addEventListener('click', () => {
+      startMusic();
+      invitationContent.classList.add('visible');
+      musicBtn.style.display = 'flex';
+      startOverlay.style.opacity = '0';
+      setTimeout(() => { startOverlay.style.display = 'none'; }, 800);
+      setTimeout(() => { initReversibleCards(); animateCountdownOnScroll(); }, 500);
+    });
+    musicBtn.addEventListener('click', toggleMusic);
+
+    const eventDate = new Date(2026, 3, 30, 21, 0, 0);
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+      if (distance < 0) { document.getElementById('days').innerText = '00'; document.getElementById('hours').innerText = '00'; document.getElementById('minutes').innerText = '00'; document.getElementById('seconds').innerText = '00'; return; }
+      const days = Math.floor(distance / (1000*60*60*24));
+      const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+      const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+      const seconds = Math.floor((distance % (1000*60)) / 1000);
+      document.getElementById('days').innerText = days < 10 ? '0'+days : days;
+      document.getElementById('hours').innerText = hours < 10 ? '0'+hours : hours;
+      document.getElementById('minutes').innerText = minutes < 10 ? '0'+minutes : minutes;
+      document.getElementById('seconds').innerText = seconds < 10 ? '0'+seconds : seconds;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const form = document.getElementById('rsvpForm');
+    const feedbackDiv = document.getElementById('formFeedback');
+    function showFeedback(msg, isError = false) { feedbackDiv.innerText = msg; feedbackDiv.style.color = isError ? "#e67e22" : "#2ecc71"; setTimeout(() => feedbackDiv.innerText = '', 5000); }
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value.trim();
+      const celular = document.getElementById('celular').value.trim();
+      const asistenciaRadio = document.querySelector('input[name="asistencia"]:checked');
+      if (!nombre) return showFeedback("❌ Ingresa tu nombre", true);
+      if (!celular) return showFeedback("❌ Ingresa tu celular", true);
+      if (!asistenciaRadio) return showFeedback("✨ Indica si asistirás", true);
+      if (asistenciaRadio.value === "Sí, estaré presente ✨") {
+        let mensaje = `*Confirmación 15 años: ${nombre} ${celular}✅ Asistiré`;
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
+        showFeedback("✨ ¡Gracias! Serás redirigido.", false);
+      }
+    });
+    document.getElementById('celular').addEventListener('input', function(e) { this.value = this.value.replace(/[^0-9+ ]/g, ''); });
+  </script>
+</body>
+</html>
